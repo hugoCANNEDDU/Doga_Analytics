@@ -2,6 +2,9 @@ import os
 import json
 import pandas as pd
 
+from pandas_profiling import ProfileReport
+
+
 def extract_data() :
 
     columns = ["Id", "Reveal Status", "Rarity", "Rarity Score", "Ranking", "Gender", "Breed", "Fur Color", "Eyes Color", "Dominant Personality", "Recessive Personality", "Vitality", "Intelligence", "Robustness", "Obedience", "Friendliness", "Bonding"]
@@ -37,6 +40,9 @@ def extract_data() :
     df_data.set_index('Id', inplace=True)
     df_data.sort_index(inplace=True)
     df_data.to_csv(save_path, sep=';', decimal=',')
+
+    prof = ProfileReport(df_data)
+    prof.to_file(output_file='output.html')
 
 if __name__ == "__main__":
     extract_data()
