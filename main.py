@@ -3,6 +3,8 @@ import json
 import pandas as pd
 
 from pandas_profiling import ProfileReport
+import tabloo
+from pivottablejs import pivot_ui
 
 
 def extract_data() :
@@ -41,8 +43,9 @@ def extract_data() :
     df_data.sort_index(inplace=True)
     df_data.to_csv(save_path, sep=';', decimal=',')
 
-    prof = ProfileReport(df_data)
-    prof.to_file(output_file='output.html')
+    pivot_ui(df_data)
+
+
 
 if __name__ == "__main__":
     extract_data()
